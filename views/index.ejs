@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      color: #2c3e50;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    ul {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    li strong {
+      font-size: 18px;
+      color: #2c3e50;
+    }
+
+    a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #3498db;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    form button {
+      margin-left: 0;
+    }
+
+    p {
+      text-align: center;
+      font-size: 18px;
+      color: #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+<h1>Add Your Note</h1>
+<form action="/add" method="post">
+  <input type="text" name="task" placeholder="Enter your note..." required>
+  <button type="submit">Add Task</button>
+</form>
+
+<h1>Available Notes</h1>
+<% if(notes.length > 0) { %>
+  <ul>
+    <% notes.forEach(n => { %>
+      <li>
+        <strong><%= n.task %></strong>
+        <div>
+          <a href="/view/<%= n._id %>">View</a>
+          <a href="/update/<%= n._id %>">Update</a>
+          <form action="/delete/<%= n._id %>" method="post" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No Data Available for Now!</p>
+<% } %>
+
+</body>
+</html>
